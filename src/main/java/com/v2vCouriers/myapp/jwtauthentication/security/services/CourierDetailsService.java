@@ -1,7 +1,10 @@
 package com.v2vCouriers.myapp.jwtauthentication.security.services;
 
+//import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
@@ -39,16 +42,10 @@ public class CourierDetailsService {
 	        return courier;
 	    }
 	    
-	    public Courier findByStatus(String status) {
+	    public List<Courier> findByStatus(String status){
 	    	
-	        Courier courier = null;
-			try {
-				courier = courierRepository.findByStatus(status).orElseThrow(
-						() -> new Exception("Courier Not Found with -> status : " + status));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	        List<Courier>  courier= courierRepository.findByStatus(status);
 	        return courier;
+	        
 	    }
 }

@@ -1,5 +1,6 @@
 package com.v2vCouriers.myapp.jwtauthentication.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,7 @@ public interface CourierRepository extends JpaRepository<Courier, Long> {
 
 	Optional<Courier> findById(Long id);
 	Optional<Courier> findByEmail(String email);
-	Optional<Courier> findByStatus(String status);
+	List<Courier> findByStatus(String status);
    
     
 }

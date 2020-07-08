@@ -99,8 +99,9 @@ public class Courier {
     private Date pickupDate;
     
     @Size(min=3, max = 90)
-    @Column(columnDefinition = "varchar(30) default 'Yet to accept'")
-    private String status;
+   // @Column(columnDefinition = "varchar(30) default 'Yet to accept'")
+    @Column
+    private String status = "Yet_to_accept";
     
     @NotBlank
     @Column

@@ -1,5 +1,9 @@
 package com.v2vCouriers.myapp.jwtauthentication.controller;
 
+
+
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +23,8 @@ import com.v2vCouriers.myapp.jwtauthentication.message.response.ResponseMessage;
 import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
 import com.v2vCouriers.myapp.jwtauthentication.repository.CourierRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
+
+
 
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -49,21 +55,21 @@ public class CourierRestAPIs {
 	}
 	
 	
-	@RequestMapping("/couriers/{id}")
+	@RequestMapping("/couriersbyid/{id}")
 	public Courier getCourierById(@PathVariable Long id) {;
 		return courierDetailsService.findById(id);
 	}
 	
-	/*
-	@RequestMapping("/couriers")
+	//http://localhost:8080/v2vcouriers/couriersbyemail?email=abc@gmail.com
+	@RequestMapping("/couriersbyemail")
 	public Courier getCourierByEmail(@RequestParam("email")  String email) {;
 		return courierDetailsService.findByEmail(email);
 	}
 	
-	@RequestMapping("/couriers")
-	public Courier getCourierByStatus(@PathVariable String status) {;
-		return courierDetailsService.findByEmail(status);
-	}*/
+	@RequestMapping("/couriersbystatus")
+	public List<Courier> getCourierByStatus(@RequestParam("status") String status) {;
+		return courierDetailsService.findByStatus(status);
+	}
 	
 	
 }

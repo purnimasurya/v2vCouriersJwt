@@ -77,8 +77,9 @@ public class CourierForm {
     @Temporal(TemporalType.DATE)
     private Date pickupDate;
     
+    
     @Size(min=3, max = 90)
-    private String status;
+    private String status = "Yet_to_accept";
     
     @NotBlank
     private String wt;
