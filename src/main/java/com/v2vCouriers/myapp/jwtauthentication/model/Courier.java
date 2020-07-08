@@ -10,9 +10,7 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NaturalId;
-import org.springframework.data.jpa.repository.Modifying;
 
-import com.sun.istack.internal.NotNull;
 
 @Entity
 @Table(name = "courier")
@@ -27,7 +25,7 @@ public class Courier {
     @NotBlank
     @Size(min=3, max = 50)
     @Column
-    private String senderName;
+    private String sendername;
     
     @NaturalId
     @NotBlank
@@ -39,31 +37,30 @@ public class Courier {
     @NotBlank
     @Size(min=10, max = 11)
     @Column
-    private String phNumber;
+    private String phnumber;
     
     @NotBlank
     @Size(min=3, max = 90)
     @Column
-    private String senderAddress;
+    private String senderaddress;
     
     @NotBlank
     @Size(min=3, max = 30)
     @Column
-    private String senderCity;
+    private String sendercity;
     
     @NotBlank
     @Size(min=3, max = 30)
     @Column
-    private String senderState;
+    private String senderstate;
     
-    @NotNull
     @Column
     private boolean agree;
 
     @NotBlank
     @Size(min=3, max = 50)
     @Column
-    private String contactType;
+    private String contacttype;
     
     @NotBlank
     @Size(min=3, max = 50)
@@ -73,35 +70,33 @@ public class Courier {
     @NotBlank
     @Size(min=10, max = 11)
     @Column
-    private String repPhNumber;
+    private String repphnumber;
     
     @NotBlank
     @Size(min=3, max = 90)
     @Column
-    private String repAddress;
+    private String repaddress;
     
     @NotBlank
     @Size(min=3, max = 30)
     @Column
-    private String repCity;
+    private String repcity;
     
     @NotBlank
     @Size(min=3, max = 30)
     @Column
-    private String repState;
+    private String repstate;
     
     @NotBlank
     @Size(min=3, max = 50)
     @Column
-    private String courierService;
+    private String courierservice;
     
-    @NotNull
     @Temporal(TemporalType.DATE)
     @Column
-    private Date pickupDate;
+    private Date pickupdate;
     
     @Size(min=3, max = 90)
-   // @Column(columnDefinition = "varchar(30) default 'Yet to accept'")
     @Column
     private String status = "Yet_to_accept";
     
@@ -120,21 +115,21 @@ public class Courier {
 			boolean agree, String contactType,String repName,String repPhNumber,String repAddress, String repCity,
 			String repState,String courierService, Date pickupDate,String wt, String vol, String price) {
 		super();
-		this.senderName = senderName;
+		this.sendername = senderName;
 		this.email = email;
-		this.phNumber = phNumber;
-		this.senderAddress = senderAddress;
-		this.senderCity = senderCity;
-		this.senderState = senderState;
+		this.phnumber = phNumber;
+		this.senderaddress = senderAddress;
+		this.sendercity = senderCity;
+		this.senderstate = senderState;
 		this.agree = agree;
-		this.contactType = contactType;
+		this.contacttype = contactType;
 		this.repName = repName;
-		this.repPhNumber = repPhNumber;
-		this.repAddress = repAddress;
-		this.repCity = repCity;
-		this.repState = repState;
-		this.courierService = courierService;
-		this.pickupDate = pickupDate;
+		this.repphnumber = repPhNumber;
+		this.repaddress = repAddress;
+		this.repcity = repCity;
+		this.repstate = repState;
+		this.courierservice = courierService;
+		this.pickupdate = pickupDate;
 		this.wt = wt;
 		this.vol = vol;
 		this.price = price;
@@ -157,12 +152,12 @@ public class Courier {
 
 
 	public String getSenderName() {
-		return senderName;
+		return sendername;
 	}
 
 
 	public void setSenderName(String senderName) {
-		this.senderName = senderName;
+		this.sendername = senderName;
 	}
 
 
@@ -177,42 +172,42 @@ public class Courier {
 
 
 	public String getPhNumber() {
-		return phNumber;
+		return phnumber;
 	}
 
 
 	public void setPhNumber(String phNumber) {
-		this.phNumber = phNumber;
+		this.phnumber = phNumber;
 	}
 
 
 	public String getSenderAddress() {
-		return senderAddress;
+		return senderaddress;
 	}
 
 
 	public void setSenderAddress(String senderAddress) {
-		this.senderAddress = senderAddress;
+		this.senderaddress = senderAddress;
 	}
 
 
 	public String getSenderCity() {
-		return senderCity;
+		return sendercity;
 	}
 
 
 	public void setSenderCity(String senderCity) {
-		this.senderCity = senderCity;
+		this.sendercity = senderCity;
 	}
 
 
 	public String getSenderState() {
-		return senderState;
+		return senderstate;
 	}
 
 
 	public void setSenderState(String senderState) {
-		this.senderState = senderState;
+		this.senderstate = senderState;
 	}
 
 
@@ -227,12 +222,12 @@ public class Courier {
 
 
 	public String getContactType() {
-		return contactType;
+		return contacttype;
 	}
 
 
 	public void setContactType(String contactType) {
-		this.contactType = contactType;
+		this.contacttype = contactType;
 	}
 
 
@@ -247,62 +242,62 @@ public class Courier {
 
 
 	public String getRepPhNumber() {
-		return repPhNumber;
+		return repphnumber;
 	}
 
 
 	public void setRepPhNumber(String repPhNumber) {
-		this.repPhNumber = repPhNumber;
+		this.repphnumber = repPhNumber;
 	}
 
 
 	public String getRepAddress() {
-		return repAddress;
+		return repaddress;
 	}
 
 
 	public void setRepAddress(String repAddress) {
-		this.repAddress = repAddress;
+		this.repaddress = repAddress;
 	}
 
 
 	public String getRepCity() {
-		return repCity;
+		return repcity;
 	}
 
 
 	public void setRepCity(String repCity) {
-		this.repCity = repCity;
+		this.repcity = repCity;
 	}
 
 
 	public String getRepState() {
-		return repState;
+		return repstate;
 	}
 
 
 	public void setRepState(String repState) {
-		this.repState = repState;
+		this.repstate = repState;
 	}
 
 
 	public String getCourierService() {
-		return courierService;
+		return courierservice;
 	}
 
 
 	public void setCourierService(String courierService) {
-		this.courierService = courierService;
+		this.courierservice = courierService;
 	}
 
 
 	public Date getPickupDate() {
-		return pickupDate;
+		return pickupdate;
 	}
 
 
 	public void setPickupDate(Date pickupDate) {
-		this.pickupDate = pickupDate;
+		this.pickupdate = pickupDate;
 	}
 
 

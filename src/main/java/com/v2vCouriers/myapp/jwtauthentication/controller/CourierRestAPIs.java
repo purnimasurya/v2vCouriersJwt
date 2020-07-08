@@ -39,7 +39,7 @@ public class CourierRestAPIs {
 	private CourierDetailsService courierDetailsService;
 
 	
-	//http://localhost:8080/v2vcouriers/newcorier
+	//http://localhost:8080/v2vcouriers/newcourier
 	@PostMapping("/newcourier")
 	public ResponseEntity<?> saveCourier (@Valid @RequestBody CourierForm courierRequest) {
 
@@ -57,7 +57,7 @@ public class CourierRestAPIs {
 	}
 	
 	//Sample request
-	//http://localhost:8080/v2vcouriers/corierbyid/{id}
+	//http://localhost:8080/v2vcouriers/courierbyid/{id}
 	@RequestMapping("/courierbyid/{id}")
 	public Courier getCourierById(@PathVariable Long id) {
 		return courierDetailsService.findById(id);

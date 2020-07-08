@@ -10,15 +10,13 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.NaturalId;
 
-import com.sun.istack.internal.NotNull;
-
 public class CourierForm {
 
 	private Long id;
 	
     @NotBlank
     @Size(min=3, max = 50)
-    private String senderName;
+    private String sendername;
     
     @NaturalId
     @NotBlank
@@ -28,54 +26,52 @@ public class CourierForm {
     
     @NotBlank
     @Size(min=10, max = 11)
-    private String phNumber;
+    private String phnumber;
     
     @NotBlank
     @Size(min=3, max = 90)
-    private String senderAddress;
+    private String senderaddress;
     
     @NotBlank
     @Size(min=3, max = 30)
-    private String senderCity;
+    private String sendercity;
     
     @NotBlank
     @Size(min=3, max = 30)
-    private String senderState;
+    private String senderstate;
     
-    @NotNull
     private boolean agree;
 
     @NotBlank
     @Size(min=3, max = 50)
-    private String contactType;
+    private String contacttype;
     
     @NotBlank
     @Size(min=3, max = 50)
-    private String repName;
+    private String repname;
     
     @NotBlank
     @Size(min=10, max = 11)
-    private String repPhNumber;
+    private String repphnumber;
     
     @NotBlank
     @Size(min=3, max = 90)
-    private String repAddress;
+    private String repaddress;
     
     @NotBlank
     @Size(min=3, max = 30)
-    private String repCity;
+    private String repcity;
     
     @NotBlank
     @Size(min=3, max = 30)
-    private String repState;
+    private String repstate;
     
     @NotBlank
     @Size(min=3, max = 50)
-    private String courierService;
+    private String courierservice;
     
-    @NotNull
     @Temporal(TemporalType.DATE)
-    private Date pickupDate;
+    private Date pickupdate;
     
     
     @Size(min=3, max = 90)
@@ -98,11 +94,11 @@ public class CourierForm {
 	}
 
 	public String getSenderName() {
-		return senderName;
+		return sendername;
 	}
 
 	public void setSenderName(String senderName) {
-		this.senderName = senderName;
+		this.sendername = senderName;
 	}
 
 	public String getEmail() {
@@ -114,35 +110,35 @@ public class CourierForm {
 	}
 
 	public String getPhNumber() {
-		return phNumber;
+		return phnumber;
 	}
 
 	public void setPhNumber(String phNumber) {
-		this.phNumber = phNumber;
+		this.phnumber = phNumber;
 	}
 
 	public String getSenderAddress() {
-		return senderAddress;
+		return senderaddress;
 	}
 
 	public void setSenderAddress(String senderAddress) {
-		this.senderAddress = senderAddress;
+		this.senderaddress = senderAddress;
 	}
 
 	public String getSenderCity() {
-		return senderCity;
+		return sendercity;
 	}
 
 	public void setSenderCity(String senderCity) {
-		this.senderCity = senderCity;
+		this.sendercity = senderCity;
 	}
 
 	public String getSenderState() {
-		return senderState;
+		return senderstate;
 	}
 
 	public void setSenderState(String senderState) {
-		this.senderState = senderState;
+		this.senderstate = senderState;
 	}
 
 	public boolean isAgree() {
@@ -154,67 +150,67 @@ public class CourierForm {
 	}
 
 	public String getContactType() {
-		return contactType;
+		return contacttype;
 	}
 
 	public void setContactType(String contactType) {
-		this.contactType = contactType;
+		this.contacttype = contactType;
 	}
 
 	public String getRepName() {
-		return repName;
+		return repname;
 	}
 
 	public void setRepName(String repName) {
-		this.repName = repName;
+		this.repname = repName;
 	}
 
 	public String getRepPhNumber() {
-		return repPhNumber;
+		return repphnumber;
 	}
 
 	public void setRepPhNumber(String repPhNumber) {
-		this.repPhNumber = repPhNumber;
+		this.repphnumber = repPhNumber;
 	}
 
 	public String getRepAddress() {
-		return repAddress;
+		return repaddress;
 	}
 
 	public void setRepAddress(String repAddress) {
-		this.repAddress = repAddress;
+		this.repaddress = repAddress;
 	}
 
 	public String getRepCity() {
-		return repCity;
+		return repcity;
 	}
 
 	public void setRepCity(String repCity) {
-		this.repCity = repCity;
+		this.repcity = repCity;
 	}
 
 	public String getRepState() {
-		return repState;
+		return repstate;
 	}
 
 	public void setRepState(String repState) {
-		this.repState = repState;
+		this.repstate = repState;
 	}
 
 	public String getCourierService() {
-		return courierService;
+		return courierservice;
 	}
 
 	public void setCourierService(String courierService) {
-		this.courierService = courierService;
+		this.courierservice = courierService;
 	}
 
 	public Date getPickupDate() {
-		return pickupDate;
+		return pickupdate;
 	}
 
 	public void setPickupDate(Date pickupDate) {
-		this.pickupDate = pickupDate;
+		this.pickupdate = pickupDate;
 	}
 
 	public String getStatus() {
