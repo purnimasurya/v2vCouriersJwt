@@ -8,13 +8,15 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.annotations.NaturalId;
+import org.springframework.data.jpa.repository.Modifying;
 
 import com.sun.istack.internal.NotNull;
 
 @Entity
 @Table(name = "courier")
-
+@DynamicUpdate
 public class Courier {
 
 	
@@ -116,7 +118,7 @@ public class Courier {
 
 	public Courier(String senderName, String email, String phNumber,String senderAddress, String senderState, String senderCity,
 			boolean agree, String contactType,String repName,String repPhNumber,String repAddress, String repCity,
-			String repState,String courierService, Date pickupDate,String wt, String vol) {
+			String repState,String courierService, Date pickupDate,String wt, String vol, String price) {
 		super();
 		this.senderName = senderName;
 		this.email = email;
@@ -135,6 +137,7 @@ public class Courier {
 		this.pickupDate = pickupDate;
 		this.wt = wt;
 		this.vol = vol;
+		this.price = price;
 	}
 
 	

@@ -48,4 +48,30 @@ public class CourierDetailsService {
 	        return courier;
 	        
 	    }
+
+		public void updateStatus(Long id) {
+			
+			Courier courier = null;
+			try {
+				courier = courierRepository.findById(id).orElseThrow(
+						() -> new Exception("Courier Not Found with -> id : " + id));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			String status = courier.getStatus();
+			if(status.equals("Yet_to_accept")) {
+				courier.setStatus("Yet_to_recieve");
+			}
+			if(status.equals("Yet_to_recieve")) {
+				courier.setStatus("In_progress");
+			}
+			if(status.equals("In_progress")) {
+				courier.setStatus("Ready_to_deliver");
+			}
+			if(status.equals("Ready_to_deliver")) {
+				courier.setStatus("Delivered");
+			}
+			courierRepository.save(courier);
+		}
 }

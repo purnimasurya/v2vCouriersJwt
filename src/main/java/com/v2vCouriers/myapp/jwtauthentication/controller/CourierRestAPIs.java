@@ -10,9 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,7 +37,9 @@ public class CourierRestAPIs {
 	
 	@Autowired
 	private CourierDetailsService courierDetailsService;
+
 	
+	//http://localhost:8080/v2vcouriers/newcorier
 	@PostMapping("/newcourier")
 	public ResponseEntity<?> saveCourier (@Valid @RequestBody CourierForm courierRequest) {
 
@@ -47,29 +49,50 @@ public class CourierRestAPIs {
 				courierRequest.isAgree(), courierRequest.getContactType(), courierRequest.getRepName(), 
 				courierRequest.getRepPhNumber(), courierRequest.getRepAddress(), courierRequest.getRepCity(),
 				courierRequest.getSenderState(), courierRequest.getCourierService(), courierRequest.getPickupDate(), 
-				courierRequest.getWt(), courierRequest.getVol());
+				courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
 
 		courierRepository.save(courier);
 
 		return new ResponseEntity<>(new ResponseMessage("Courier registered successfully!"), HttpStatus.OK);
 	}
 	
-	
-	@RequestMapping("/couriersbyid/{id}")
-	public Courier getCourierById(@PathVariable Long id) {;
+	//Sample request
+	//http://localhost:8080/v2vcouriers/corierbyid/{id}
+	@RequestMapping("/courierbyid/{id}")
+	public Courier getCourierById(@PathVariable Long id) {
 		return courierDetailsService.findById(id);
 	}
 	
-	//http://localhost:8080/v2vcouriers/couriersbyemail?email=abc@gmail.com
-	@RequestMapping("/couriersbyemail")
-	public Courier getCourierByEmail(@RequestParam("email")  String email) {;
+	//Sample request
+	//http://localhost:8080/v2vcouriers/courierbyemail?email=abc@gmail.com
+	@RequestMapping("/courierbyemail")
+	public Courier getCourierByEmail(@RequestParam("email")  String email) {
 		return courierDetailsService.findByEmail(email);
 	}
 	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/couriersbystatus?status=Yet_to_accept
 	@RequestMapping("/couriersbystatus")
-	public List<Courier> getCourierByStatus(@RequestParam("status") String status) {;
+	public List<Courier> getCourierByStatus(@RequestParam("status") String status) {
 		return courierDetailsService.findByStatus(status);
 	}
 	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/updatecourierstatus?id=1
+	@PutMapping("/updatecourierstatus")
+	public ResponseEntity<?> updateCourierStatus (@RequestParam("id") Long id) {
+
+		// Updating the Courier Status
+		try {
+			courierDetailsService.updateStatus(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+		
+		
+	}
 	
 }
