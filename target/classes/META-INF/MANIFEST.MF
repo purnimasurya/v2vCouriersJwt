@@ -3,7 +3,7 @@ Built-By: purnimasurya
 Build-Jdk: 11.0.3
 Implementation-Title: SpringBootJwtAuthentication
 Implementation-Version: 0.0.1
-Implementation-Vendor-Id: com.grokonez.jwtauthentication
+Implementation-Vendor-Id: com.v2vCouriers.myapp.jwtauthentication
 Implementation-URL: https://projects.spring.io/spring-boot/#/spring-boot
  -starter-parent/SpringBootJwtAuthentication
 Created-By: Maven Integration for Eclipse
