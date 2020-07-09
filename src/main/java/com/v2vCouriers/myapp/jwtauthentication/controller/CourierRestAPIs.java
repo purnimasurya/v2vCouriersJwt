@@ -27,6 +27,7 @@ import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsS
 
 
 
+
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/v2vcouriers")
@@ -58,35 +59,62 @@ public class CourierRestAPIs {
 		return new ResponseEntity<>(new ResponseMessage("Courier registered successfully!"), HttpStatus.OK);
 	}
 	
+	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/courierbyid/{id}
 	@RequestMapping("/courierbyid/{id}")
-	public Courier getCourierById(@PathVariable Long id) {
+	public Courier getCourierById(@PathVariable Long id) throws Exception {
 		return courierDetailsService.findById(id);
 	}
+	
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/courierbyemail?email=abc@gmail.com
 	@RequestMapping("/courierbyemail")
-	public Courier getCourierByEmail(@RequestParam("email")  String email) {
+	public Courier getCourierByEmail(@RequestParam("email")  String email) throws Exception {
 		return courierDetailsService.findByEmail(email);
 	}
 	
+	
 	//Sample request
-	//http://localhost:8080/v2vcouriers/couriersbystatus?status=Yet_to_accept
-	@RequestMapping("/couriersbystatus")
-	public List<Courier> getCourierByStatus(@RequestParam("status") String status) {
-		return courierDetailsService.findByStatus(status);
+	//http://localhost:8080/v2vcouriers/couriersbyytastatus
+	@RequestMapping("/couriersbyytastatus")
+	public List<Courier> getCourierByYtaStatus() throws Exception {
+		return courierDetailsService.findByStatus("Yet_to_accept");
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/couriersbyytrstatus
+	@RequestMapping("/couriersbyytrstatus")
+	public List<Courier> getCourierByYtrStatus() throws Exception {
+		return courierDetailsService.findByStatus("Yet_to_recieve");
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/couriersbyinstatus
+	@RequestMapping("/couriersbyinstatus")
+	public List<Courier> getCourierByInStatus() throws Exception {
+		return courierDetailsService.findByStatus("In_progress");
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/couriersbyrtdstatus
+	@RequestMapping("/couriersbyrtdstatus")
+	public List<Courier> getCourierByRtdStatus() throws Exception {
+		return courierDetailsService.findByStatus("Ready_to_deliever");
 	}
 	
 	//Sample request
-	//http://localhost:8080/v2vcouriers/updatecourierstatus?id=1
-	@PutMapping("/updatecourierstatus")
-	public ResponseEntity<?> updateCourierStatus (@RequestParam("id") Long id) {
+	//http://localhost:8080/v2vcouriers/updateytastatus
+	@PutMapping("/updateytastatus/{id}")
+	public ResponseEntity<?> updateYetToAcceptStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
 		try {
-			courierDetailsService.updateStatus(id);
+			courierDetailsService.updateStatusToYetToRecieve(id);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +122,61 @@ public class CourierRestAPIs {
 		
 		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
 		
-		
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/updateytastatus
+	@PutMapping("/updateytrstatus/{id}")
+	public ResponseEntity<?> updateYetToRecieveStatus (@PathVariable Long id) {
+
+		// Updating the Courier Status
+		try {
+			courierDetailsService.updateStatusToInProgress(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+			
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/updateinstatus
+	@PutMapping("/updateipstatus/{id}")
+	public ResponseEntity<?> updateInProgressStatus (@PathVariable Long id) {
+
+		// Updating the Courier Status
+		try 
+		{
+			courierDetailsService.updateStatusToReadyToDeliver(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+			
+	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/updatertdstatus
+	@PutMapping("/updatertdstatus/{id}")
+	public ResponseEntity<?> updateReadyToDeliverStatus (@PathVariable Long id) {
+
+		// Updating the Courier Status
+		try {
+			courierDetailsService.updateStatusToDelivered(id);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+			
+		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+			
 	}
 	
 }

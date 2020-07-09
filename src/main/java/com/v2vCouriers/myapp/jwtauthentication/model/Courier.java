@@ -116,8 +116,7 @@ public class Courier {
 	public Courier() {
 		
 	}
-    
-    
+      
     
 	public Courier(String sendername,String email, String phnumber,String senderaddress, String sendercity, String senderstate,
 			boolean agree,  String contacttype, String repname, String repphnumber, String repaddress,  String repcity,

@@ -1,6 +1,5 @@
 package com.v2vCouriers.myapp.jwtauthentication.security.services;
 
-//import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,62 +15,85 @@ public class CourierDetailsService {
 	 	@Autowired
 	    private CourierRepository courierRepository;
 
-	    public Courier findById(Long id) {
+	    public Courier findById(Long id) throws Exception {
 	    	
 	        Courier courier = null;
-			try {
-				courier = courierRepository.findById(id).orElseThrow(
+			courier = courierRepository.findById(id).orElseThrow(
 						() -> new Exception("Courier Not Found with -> id : " + id));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	        return courier;
 	    }
 	    
-	    public Courier findByEmail(String email) {
+	    public Courier findByEmail(String email) throws Exception {
 	    	
 	        Courier courier = null;
-			try {
 				courier = courierRepository.findByEmail(email).orElseThrow(
 						() -> new Exception("Courier Not Found with -> email : " + email));
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	        return courier;
 	    }
 	    
-	    public List<Courier> findByStatus(String status){
+	    public List<Courier> findByStatus(String status) throws Exception{
 	    	
-	        List<Courier>  courier= courierRepository.findByStatus(status);
+	    	List<Courier>  courier = null;
+	    	if(courierRepository.existsByStatus(status)){
+	    		courier = courierRepository.findByStatus(status);
+	    	}
+	    	else {
+				throw new Exception("Courier Not Found with -> status : " + status);
+			}
 	        return courier;
 	        
 	    }
+	    
 
-		public void updateStatus(Long id) {
+		public void updateStatusToYetToRecieve(Long id) {
 			
 			Courier courier = null;
 			try {
 				courier = courierRepository.findById(id).orElseThrow(
 						() -> new Exception("Courier Not Found with -> id : " + id));
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String status = courier.getStatus();
-			if(status.equals("Yet_to_accept")) {
-				courier.setStatus("Yet_to_recieve");
+			courier.setStatus("Yet_to_recieve");
+			courierRepository.save(courier);
+		}
+		
+		public void updateStatusToInProgress(Long id) {
+			
+			Courier courier = null;
+			try {
+				courier = courierRepository.findById(id).orElseThrow(
+						() -> new Exception("Courier Not Found with -> id : " + id));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			if(status.equals("Yet_to_recieve")) {
-				courier.setStatus("In_progress");
+			courier.setStatus("In_progress");
+			courierRepository.save(courier);
+		}
+		
+		public void updateStatusToReadyToDeliver(Long id) {
+			
+			Courier courier = null;
+			try {
+				courier = courierRepository.findById(id).orElseThrow(
+						() -> new Exception("Courier Not Found with -> id : " + id));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			if(status.equals("In_progress")) {
-				courier.setStatus("Ready_to_deliver");
+			courier.setStatus("Ready_to_deliver");
+			courierRepository.save(courier);
+		}
+		
+		public void updateStatusToDelivered(Long id) {
+			
+			Courier courier = null;
+			try {
+				courier = courierRepository.findById(id).orElseThrow(
+						() -> new Exception("Courier Not Found with -> id : " + id));
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			if(status.equals("Ready_to_deliver")) {
-				courier.setStatus("Delivered");
-			}
+			courier.setStatus("Delivered");
 			courierRepository.save(courier);
 		}
 }
