@@ -50,7 +50,7 @@ public class CourierForm {
     @Size(min=3, max = 50)
     private String repname;
     
-    @NotBlank
+
     @Size(min=10, max = 11)
     private String repphnumber;
     
@@ -93,12 +93,12 @@ public class CourierForm {
 		this.id = id;
 	}
 
-	public String getSenderName() {
+	public String getSendername() {
 		return sendername;
 	}
 
-	public void setSenderName(String senderName) {
-		this.sendername = senderName;
+	public void setSendername(String sendername) {
+		this.sendername = sendername;
 	}
 
 	public String getEmail() {
@@ -109,36 +109,36 @@ public class CourierForm {
 		this.email = email;
 	}
 
-	public String getPhNumber() {
+	public String getPhnumber() {
 		return phnumber;
 	}
 
-	public void setPhNumber(String phNumber) {
-		this.phnumber = phNumber;
+	public void setPhnumber(String phnumber) {
+		this.phnumber = phnumber;
 	}
 
-	public String getSenderAddress() {
+	public String getSenderaddress() {
 		return senderaddress;
 	}
 
-	public void setSenderAddress(String senderAddress) {
-		this.senderaddress = senderAddress;
+	public void setSenderaddress(String senderaddress) {
+		this.senderaddress = senderaddress;
 	}
 
-	public String getSenderCity() {
+	public String getSendercity() {
 		return sendercity;
 	}
 
-	public void setSenderCity(String senderCity) {
-		this.sendercity = senderCity;
+	public void setSendercity(String sendercity) {
+		this.sendercity = sendercity;
 	}
 
-	public String getSenderState() {
+	public String getSenderstate() {
 		return senderstate;
 	}
 
-	public void setSenderState(String senderState) {
-		this.senderstate = senderState;
+	public void setSenderstate(String senderstate) {
+		this.senderstate = senderstate;
 	}
 
 	public boolean isAgree() {
@@ -149,68 +149,68 @@ public class CourierForm {
 		this.agree = agree;
 	}
 
-	public String getContactType() {
+	public String getContacttype() {
 		return contacttype;
 	}
 
-	public void setContactType(String contactType) {
-		this.contacttype = contactType;
+	public void setContacttype(String contacttype) {
+		this.contacttype = contacttype;
 	}
 
-	public String getRepName() {
+	public String getRepname() {
 		return repname;
 	}
 
-	public void setRepName(String repName) {
-		this.repname = repName;
+	public void setRepname(String repname) {
+		this.repname = repname;
 	}
 
-	public String getRepPhNumber() {
+	public String getRepphnumber() {
 		return repphnumber;
 	}
 
-	public void setRepPhNumber(String repPhNumber) {
-		this.repphnumber = repPhNumber;
+	public void setRepphnumber(String repphnumber) {
+		this.repphnumber = repphnumber;
 	}
 
-	public String getRepAddress() {
+	public String getRepaddress() {
 		return repaddress;
 	}
 
-	public void setRepAddress(String repAddress) {
-		this.repaddress = repAddress;
+	public void setRepaddress(String repaddress) {
+		this.repaddress = repaddress;
 	}
 
-	public String getRepCity() {
+	public String getRepcity() {
 		return repcity;
 	}
 
-	public void setRepCity(String repCity) {
-		this.repcity = repCity;
+	public void setRepcity(String repcity) {
+		this.repcity = repcity;
 	}
 
-	public String getRepState() {
+	public String getRepstate() {
 		return repstate;
 	}
 
-	public void setRepState(String repState) {
-		this.repstate = repState;
+	public void setRepstate(String repstate) {
+		this.repstate = repstate;
 	}
 
-	public String getCourierService() {
+	public String getCourierservice() {
 		return courierservice;
 	}
 
-	public void setCourierService(String courierService) {
-		this.courierservice = courierService;
+	public void setCourierservice(String courierservice) {
+		this.courierservice = courierservice;
 	}
 
-	public Date getPickupDate() {
+	public Date getPickupdate() {
 		return pickupdate;
 	}
 
-	public void setPickupDate(Date pickupDate) {
-		this.pickupdate = pickupDate;
+	public void setPickupdate(Date pickupdate) {
+		this.pickupdate = pickupdate;
 	}
 
 	public String getStatus() {
@@ -244,6 +244,8 @@ public class CourierForm {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
+	
     
     
 }

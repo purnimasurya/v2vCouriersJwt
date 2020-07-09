@@ -92,7 +92,7 @@ public class AuthRestAPIs {
 				roles.add(adminRole);
 
 				break;
-			case "pm":
+			case "courierboy":
 				Role courierBoyRole = roleRepository.findByName(RoleName.ROLE_COURIERBOY)
 						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));
 				roles.add(courierBoyRole);

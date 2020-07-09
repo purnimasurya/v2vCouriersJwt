@@ -44,12 +44,14 @@ public class CourierRestAPIs {
 	public ResponseEntity<?> saveCourier (@Valid @RequestBody CourierForm courierRequest) {
 
 		// Saving the new Courier Details
-		Courier courier = new Courier(courierRequest.getSenderName(), courierRequest.getEmail(), courierRequest.getPhNumber(), 
-				courierRequest.getSenderAddress(), courierRequest.getSenderCity(), courierRequest.getSenderState(), 
-				courierRequest.isAgree(), courierRequest.getContactType(), courierRequest.getRepName(), 
-				courierRequest.getRepPhNumber(), courierRequest.getRepAddress(), courierRequest.getRepCity(),
-				courierRequest.getSenderState(), courierRequest.getCourierService(), courierRequest.getPickupDate(), 
-				courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
+		Courier courier = new Courier(courierRequest.getSendername(), courierRequest.getEmail(), courierRequest.getPhnumber(), 
+				courierRequest.getSenderaddress(), courierRequest.getSendercity(), courierRequest.getSenderstate(), 
+				courierRequest.isAgree(), courierRequest.getContacttype(), courierRequest.getRepname(), 
+				courierRequest.getRepphnumber(), courierRequest.getRepaddress(), courierRequest.getRepcity(),
+				courierRequest.getSenderstate(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
+				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
+		
+		System.out.println(courier);
 
 		courierRepository.save(courier);
 
