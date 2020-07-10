@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -110,6 +111,7 @@ public class CourierRestAPIs {
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateytastatus
 	@PutMapping("/updateytastatus/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> updateYetToAcceptStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
@@ -128,6 +130,7 @@ public class CourierRestAPIs {
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateytastatus
 	@PutMapping("/updateytrstatus/{id}")
+	@PreAuthorize("hasRole('COURIERBOY')")
 	public ResponseEntity<?> updateYetToRecieveStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
@@ -146,6 +149,7 @@ public class CourierRestAPIs {
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateinstatus
 	@PutMapping("/updateipstatus/{id}")
+	@PreAuthorize("hasRole('ADMIN')")
 	public ResponseEntity<?> updateInProgressStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
@@ -165,6 +169,7 @@ public class CourierRestAPIs {
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updatertdstatus
 	@PutMapping("/updatertdstatus/{id}")
+	@PreAuthorize("hasRole('COURIERBOY')")
 	public ResponseEntity<?> updateReadyToDeliverStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status

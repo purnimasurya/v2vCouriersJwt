@@ -15,7 +15,7 @@ public class TestRestAPIs {
 		return ">>> User Contents!";
 	}
 
-	@GetMapping("/api/test/pm")
+	@GetMapping("/api/test/courier")
 	@PreAuthorize("hasRole('COURIERBOY') or hasRole('ADMIN')")
 	public String projectManagementAccess() {
 		return ">>> Project Management Board";
