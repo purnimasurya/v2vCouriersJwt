@@ -13,5 +13,5 @@ public interface CourierRepository extends JpaRepository<Courier, Long> {
 	Optional<Courier> findByEmail(String email);
 	List<Courier> findByStatus(String status);
 	Boolean existsByStatus(String status);
-	//Optional<Courier> updateStatus(Long id);
+	List<Courier> findByVehicle_Id(Long id);
 }

@@ -96,4 +96,15 @@ public class CourierDetailsService {
 			courier.setStatus("Delivered");
 			courierRepository.save(courier);
 		}
+
+		public List<Courier> findByVehicle_Id(Long id) {
+			List<Courier>  courier = null;
+			
+	    	courier = courierRepository.findByVehicle_Id(id);
+	    	
+	        return courier;
+			
+		}
+		
+
 }

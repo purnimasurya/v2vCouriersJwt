@@ -2,7 +2,10 @@ package com.v2vCouriers.myapp.jwtauthentication.controller;
 
 
 
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -22,7 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.v2vCouriers.myapp.jwtauthentication.message.request.CourierForm;
 import com.v2vCouriers.myapp.jwtauthentication.message.response.ResponseMessage;
 import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
+import com.v2vCouriers.myapp.jwtauthentication.model.Vehicle;
+import com.v2vCouriers.myapp.jwtauthentication.model.VehicleName;
 import com.v2vCouriers.myapp.jwtauthentication.repository.CourierRepository;
+import com.v2vCouriers.myapp.jwtauthentication.repository.VehicleRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
 
 
@@ -39,6 +45,9 @@ public class CourierRestAPIs {
 	
 	@Autowired
 	private CourierDetailsService courierDetailsService;
+	
+	@Autowired
+	VehicleRepository vehicleRepository;
 
 	
 	//http://localhost:8080/v2vcouriers/newcourier
@@ -53,7 +62,44 @@ public class CourierRestAPIs {
 				courierRequest.getSenderstate(), courierRequest.getRepcountry(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
 				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
 		
-		System.out.println(courier);
+		Vehicle strVehicle;
+		Set<Vehicle> vehicle = new HashSet<>();
+		
+		switch (courierRequest.getCourierservice().toLowerCase()) {
+			case "standard":
+				strVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_TRUCK)
+						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
+				vehicle.add(strVehicle);
+
+				break;
+			case "pallet":
+				strVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_TRUCK)
+				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
+				vehicle.add(strVehicle);
+
+				break;
+			case "same-day":
+				strVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_TRAIN)
+						.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
+				vehicle.add(strVehicle);
+
+				break;
+			case "overnight":
+				strVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_AIRPLANE)
+				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
+				vehicle.add(strVehicle);
+
+				break;
+			case "international":
+				strVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_AIRPLANE)
+				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
+				vehicle.add(strVehicle);
+		}
+
+		/*Vehicle trainVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_TRAIN)
+				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));*/
+		
+		courier.setVehicle(vehicle);
 
 		courierRepository.save(courier);
 
@@ -182,6 +228,13 @@ public class CourierRestAPIs {
 			
 		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
 			
+	}
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/courierbyid/{id}
+	@RequestMapping("/courierbyvehicle/{id}")
+	public List<Courier> getCourierByVehicle(@PathVariable Long id) throws Exception {
+		return courierDetailsService.findByVehicle_Id(id);
 	}
 	
 }

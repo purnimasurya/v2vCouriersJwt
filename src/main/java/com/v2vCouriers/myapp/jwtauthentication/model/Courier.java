@@ -2,7 +2,6 @@ package com.v2vCouriers.myapp.jwtauthentication.model;
 
 
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -131,7 +130,7 @@ public class Courier {
     @JoinTable(name = "courier_vehicles", 
     	joinColumns = @JoinColumn(name = "courier_id"), 
     	inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
-    private Set<Vehicle> vehicles = new HashSet<>();
+    private Set<Vehicle> vehicle;
 
 
 	public Courier() {
@@ -349,12 +348,12 @@ public class Courier {
 
 
 	public Set<Vehicle> getVehicle() {
-		return vehicles;
+		return vehicle;
 	}
 
 
-	public void setVehicle(Set<Vehicle> vehicles) {
-		this.vehicles = vehicles;
+	public void setVehicle(Set<Vehicle> vehicle) {
+		this.vehicle = vehicle;
 	}
 
     

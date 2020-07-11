@@ -1,7 +1,7 @@
 package com.v2vCouriers.myapp.jwtauthentication.message.request;
 
 import java.util.Date;
-
+import java.util.Set;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -93,6 +93,8 @@ public class CourierForm {
     private String vol;
     
     private String price;
+    
+    private Set<String> vehicle;
 
 	public Long getId() {
 		return id;
@@ -270,6 +272,14 @@ public class CourierForm {
 
 	public void setPrice(String price) {
 		this.price = price;
+	}
+
+	public Set<String> getVehicle() {
+		return vehicle;
+	}
+
+	public void setVehicle(Set<String> vehicle) {
+		this.vehicle = vehicle;
 	}
 
 	
