@@ -11,4 +11,5 @@ import com.v2vCouriers.myapp.jwtauthentication.model.VehicleName;
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long>{
 	Optional<Vehicle> findByName(VehicleName vehicleTrain);
+	Optional<Vehicle> findById(Long id);
 }

@@ -231,7 +231,7 @@ public class CourierRestAPIs {
 	}
 	
 	//Sample request
-	//http://localhost:8080/v2vcouriers/courierbyid/{id}
+	//http://localhost:8080/v2vcouriers/courierbyvehicle/{id}
 	@RequestMapping("/courierbyvehicle/{id}")
 	public List<Courier> getCourierByVehicle(@PathVariable Long id) throws Exception {
 		return courierDetailsService.findByVehicle_Id(id);
