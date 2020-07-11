@@ -47,10 +47,10 @@ public class CourierRestAPIs {
 
 		// Saving the new Courier Details
 		Courier courier = new Courier(courierRequest.getSendername(), courierRequest.getEmail(), courierRequest.getPhnumber(), 
-				courierRequest.getSenderaddress(), courierRequest.getSendercity(), courierRequest.getSenderstate(), 
-				courierRequest.isAgree(), courierRequest.getContacttype(), courierRequest.getRepname(), 
+				courierRequest.getSenderaddress(), courierRequest.getSendercity(), courierRequest.getSenderstate(),
+				courierRequest.getSendercountry(), courierRequest.isAgree(), courierRequest.getContacttype(), courierRequest.getRepname(), 
 				courierRequest.getRepphnumber(), courierRequest.getRepaddress(), courierRequest.getRepcity(),
-				courierRequest.getSenderstate(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
+				courierRequest.getSenderstate(), courierRequest.getRepcountry(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
 				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
 		
 		System.out.println(courier);

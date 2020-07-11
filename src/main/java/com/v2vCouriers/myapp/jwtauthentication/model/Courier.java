@@ -2,10 +2,13 @@ package com.v2vCouriers.myapp.jwtauthentication.model;
 
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.DynamicUpdate;
@@ -54,6 +57,11 @@ public class Courier {
     @Column
     private String senderstate;
     
+    @NotBlank
+    @Size(min=3, max = 30)
+    @Column
+    private String sendercountry;
+    
     @Column
     private boolean agree;
 
@@ -62,12 +70,13 @@ public class Courier {
     @Column
     private String contacttype;
     
-    @NotBlank
+    @NotNull
     @Size(min=3, max = 50)
     @Column
     private String repname;
     
 
+    @NotBlank
     @Size(min=10, max = 11)
     @Column
     private String repphnumber;
@@ -86,6 +95,12 @@ public class Courier {
     @Size(min=3, max = 30)
     @Column
     private String repstate;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
+    @Column
+    private String repcountry;
+    
     
     @NotBlank
     @Size(min=3, max = 50)
@@ -111,6 +126,12 @@ public class Courier {
     
     @Column
     private String price;
+    
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "courier_vehicles", 
+    	joinColumns = @JoinColumn(name = "courier_id"), 
+    	inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
+    private Set<Vehicle> vehicles = new HashSet<>();
 
 
 	public Courier() {
@@ -119,8 +140,8 @@ public class Courier {
       
     
 	public Courier(String sendername,String email, String phnumber,String senderaddress, String sendercity, String senderstate,
-			boolean agree,  String contacttype, String repname, String repphnumber, String repaddress,  String repcity,
-			String repstate, String courierservice, Date pickupdate,String status, String wt, String vol, String price) {
+			String sendercountry, boolean agree,  String contacttype, String repname, String repphnumber, String repaddress,  String repcity,
+			String repstate, String repcountry, String courierservice, Date pickupdate,String status, String wt, String vol, String price) {
 		super();
 		this.sendername = sendername;
 		this.email = email;
@@ -128,6 +149,7 @@ public class Courier {
 		this.senderaddress = senderaddress;
 		this.sendercity = sendercity;
 		this.senderstate = senderstate;
+		this.sendercountry = sendercountry;
 		this.agree = agree;
 		this.contacttype = contacttype;
 		this.repname = repname;
@@ -135,6 +157,7 @@ public class Courier {
 		this.repaddress = repaddress;
 		this.repcity = repcity;
 		this.repstate = repstate;
+		this.repcountry = repcountry;
 		this.courierservice = courierservice;
 		this.pickupdate = pickupdate;
 		this.status = status;
@@ -198,6 +221,18 @@ public class Courier {
 	public void setSenderstate(String senderstate) {
 		this.senderstate = senderstate;
 	}
+	
+	
+
+	public String getSendercountry() {
+		return sendercountry;
+	}
+
+
+	public void setSendercountry(String sendercountry) {
+		this.sendercountry = sendercountry;
+	}
+
 
 	public boolean isAgree() {
 		return agree;
@@ -215,12 +250,12 @@ public class Courier {
 		this.contacttype = contacttype;
 	}
 
-	public String getRepName() {
-		return repname;
+	public void setRepname(String repname) {
+		this.repname = repname;
 	}
-
-	public void setRepName(String repName) {
-		this.repname = repName;
+	
+	public String getRepname() {
+		return repname;
 	}
 
 	public String getRepphnumber() {
@@ -253,6 +288,15 @@ public class Courier {
 
 	public void setRepstate(String repstate) {
 		this.repstate = repstate;
+	}
+	
+	public String getRepcountry() {
+		return repcountry;
+	}
+
+
+	public void setRepcountry(String repcountry) {
+		this.repcountry = repcountry;
 	}
 
 	public String getCourierservice() {
@@ -303,6 +347,15 @@ public class Courier {
 		this.price = price;
 	}
 
-	
+
+	public Set<Vehicle> getVehicle() {
+		return vehicles;
+	}
+
+
+	public void setVehicle(Set<Vehicle> vehicles) {
+		this.vehicles = vehicles;
+	}
+
     
 }

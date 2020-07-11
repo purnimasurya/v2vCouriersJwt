@@ -2,6 +2,7 @@ package com.v2vCouriers.myapp.jwtauthentication.message.request;
 
 import java.util.Date;
 
+
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -40,6 +41,10 @@ public class CourierForm {
     @Size(min=3, max = 30)
     private String senderstate;
     
+    @NotBlank
+    @Size(min=3, max = 30)
+    private String sendercountry;
+    
     private boolean agree;
 
     @NotBlank
@@ -65,6 +70,10 @@ public class CourierForm {
     @NotBlank
     @Size(min=3, max = 30)
     private String repstate;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
+    private String repcountry;
     
     @NotBlank
     @Size(min=3, max = 50)
@@ -141,6 +150,14 @@ public class CourierForm {
 		this.senderstate = senderstate;
 	}
 
+	public String getSendercountry() {
+		return sendercountry;
+	}
+
+	public void setSendercountry(String sendercountry) {
+		this.sendercountry = sendercountry;
+	}
+
 	public boolean isAgree() {
 		return agree;
 	}
@@ -195,6 +212,16 @@ public class CourierForm {
 
 	public void setRepstate(String repstate) {
 		this.repstate = repstate;
+	}
+	
+	
+
+	public String getRepcountry() {
+		return repcountry;
+	}
+
+	public void setRepcountry(String repcountry) {
+		this.repcountry = repcountry;
 	}
 
 	public String getCourierservice() {
