@@ -28,6 +28,8 @@ import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
 import com.v2vCouriers.myapp.jwtauthentication.model.Vehicle;
 import com.v2vCouriers.myapp.jwtauthentication.model.VehicleName;
 import com.v2vCouriers.myapp.jwtauthentication.repository.CourierRepository;
+import com.v2vCouriers.myapp.jwtauthentication.repository.RepPriceRepository;
+import com.v2vCouriers.myapp.jwtauthentication.repository.SenderPriceRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.VehicleRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
 
@@ -48,18 +50,26 @@ public class CourierRestAPIs {
 	
 	@Autowired
 	VehicleRepository vehicleRepository;
+	
+
+	
+	@Autowired
+	SenderPriceRepository senderPriceRepository;
+	
+	@Autowired
+	RepPriceRepository repPriceRepository;
 
 	
 	//http://localhost:8080/v2vcouriers/newcourier
 	@PostMapping("/newcourier")
-	public ResponseEntity<?> saveCourier (@Valid @RequestBody CourierForm courierRequest) {
+	public ResponseEntity<?> saveCourier (@Valid @RequestBody CourierForm courierRequest) throws Exception {
 
 		// Saving the new Courier Details
 		Courier courier = new Courier(courierRequest.getSendername(), courierRequest.getEmail(), courierRequest.getPhnumber(), 
-				courierRequest.getSenderaddress(), courierRequest.getSendercity(), courierRequest.getSenderstate(),
+				courierRequest.getSenderaddress(), courierRequest.getSendercity(), courierRequest.getSenderdistrict(), courierRequest.getSenderstate(),
 				courierRequest.getSendercountry(), courierRequest.isAgree(), courierRequest.getContacttype(), courierRequest.getRepname(), 
-				courierRequest.getRepphnumber(), courierRequest.getRepaddress(), courierRequest.getRepcity(),
-				courierRequest.getSenderstate(), courierRequest.getRepcountry(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
+				courierRequest.getRepphnumber(), courierRequest.getRepaddress(), courierRequest.getRepcity(), courierRequest.getRepdistrict(),
+				courierRequest.getRepstate(), courierRequest.getRepcountry(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
 				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
 		
 		Vehicle strVehicle;
@@ -95,18 +105,16 @@ public class CourierRestAPIs {
 				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: Courier Vehicle not found."));
 				vehicle.add(strVehicle);
 		}
-
-		/*Vehicle trainVehicle = vehicleRepository.findByName(VehicleName.VEHICLE_TRAIN)
-				.orElseThrow(() -> new RuntimeException("Fail! -> Cause: User Role not find."));*/
 		
 		courier.setVehicle(vehicle);
 
 		courierRepository.save(courier);
-
+		
 		return new ResponseEntity<>(new ResponseMessage("Courier registered successfully!"), HttpStatus.OK);
+		
 	}
-	
-	
+
+
 	//Sample request
 	//http://localhost:8080/v2vcouriers/courierbyid/{id}
 	@RequestMapping("/courierbyid/{id}")
@@ -236,5 +244,6 @@ public class CourierRestAPIs {
 	public List<Courier> getCourierByVehicle(@PathVariable Long id) throws Exception {
 		return courierDetailsService.findByVehicle_Id(id);
 	}
+	
 	
 }

@@ -39,6 +39,10 @@ public class CourierForm {
     
     @NotBlank
     @Size(min=3, max = 30)
+    private String senderdistrict;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
     private String senderstate;
     
     @NotBlank
@@ -66,6 +70,10 @@ public class CourierForm {
     @NotBlank
     @Size(min=3, max = 30)
     private String repcity;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
+    private String repdistrict;
     
     @NotBlank
     @Size(min=3, max = 30)
@@ -144,6 +152,14 @@ public class CourierForm {
 		this.sendercity = sendercity;
 	}
 
+	public String getSenderdistrict() {
+		return senderdistrict;
+	}
+
+	public void setSenderdistrict(String senderdistrict) {
+		this.senderdistrict = senderdistrict;
+	}
+
 	public String getSenderstate() {
 		return senderstate;
 	}
@@ -208,6 +224,14 @@ public class CourierForm {
 		this.repcity = repcity;
 	}
 
+	public String getRepdistrict() {
+		return repdistrict;
+	}
+
+	public void setRepdistrict(String repdistrict) {
+		this.repdistrict = repdistrict;
+	}
+
 	public String getRepstate() {
 		return repstate;
 	}
@@ -215,8 +239,6 @@ public class CourierForm {
 	public void setRepstate(String repstate) {
 		this.repstate = repstate;
 	}
-	
-	
 
 	public String getRepcountry() {
 		return repcountry;

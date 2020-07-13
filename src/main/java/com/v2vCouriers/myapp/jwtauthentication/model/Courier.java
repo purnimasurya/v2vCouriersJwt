@@ -49,6 +49,11 @@ public class Courier {
     @NotBlank
     @Size(min=3, max = 30)
     @Column
+    private String senderdistrict;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
+    @Column
     private String sendercity;
     
     @NotBlank
@@ -89,6 +94,11 @@ public class Courier {
     @Size(min=3, max = 30)
     @Column
     private String repcity;
+    
+    @NotBlank
+    @Size(min=3, max = 30)
+    @Column
+    private String repdistrict;
     
     @NotBlank
     @Size(min=3, max = 30)
@@ -138,15 +148,16 @@ public class Courier {
 	}
       
     
-	public Courier(String sendername,String email, String phnumber,String senderaddress, String sendercity, String senderstate,
+	public Courier(String sendername,String email, String phnumber,String senderaddress, String sendercity, String senderdistrict, String senderstate,
 			String sendercountry, boolean agree,  String contacttype, String repname, String repphnumber, String repaddress,  String repcity,
-			String repstate, String repcountry, String courierservice, Date pickupdate,String status, String wt, String vol, String price) {
+			String repdistrict, String repstate, String repcountry, String courierservice, Date pickupdate,String status, String wt, String vol, String price) {
 		super();
 		this.sendername = sendername;
 		this.email = email;
 		this.phnumber = phnumber;
 		this.senderaddress = senderaddress;
 		this.sendercity = sendercity;
+		this.senderdistrict = senderdistrict;
 		this.senderstate = senderstate;
 		this.sendercountry = sendercountry;
 		this.agree = agree;
@@ -155,6 +166,7 @@ public class Courier {
 		this.repphnumber = repphnumber;
 		this.repaddress = repaddress;
 		this.repcity = repcity;
+		this.repdistrict = repdistrict;
 		this.repstate = repstate;
 		this.repcountry = repcountry;
 		this.courierservice = courierservice;
@@ -212,6 +224,17 @@ public class Courier {
 	public void setSendercity(String sendercity) {
 		this.sendercity = sendercity;
 	}
+	
+
+	public String getSenderdistrict() {
+		return senderdistrict;
+	}
+
+
+	public void setSenderdistrict(String senderdistrict) {
+		this.senderdistrict = senderdistrict;
+	}
+
 
 	public String getSenderstate() {
 		return senderstate;
@@ -280,6 +303,17 @@ public class Courier {
 	public void setRepcity(String repcity) {
 		this.repcity = repcity;
 	}
+	
+
+	public String getRepdistrict() {
+		return repdistrict;
+	}
+
+
+	public void setRepdistrict(String repdistrict) {
+		this.repdistrict = repdistrict;
+	}
+
 
 	public String getRepstate() {
 		return repstate;
@@ -355,6 +389,7 @@ public class Courier {
 	public void setVehicle(Set<Vehicle> vehicle) {
 		this.vehicle = vehicle;
 	}
+
 
     
 }
