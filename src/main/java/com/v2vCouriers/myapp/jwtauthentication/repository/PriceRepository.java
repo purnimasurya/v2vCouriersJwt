@@ -13,4 +13,5 @@ public interface PriceRepository extends JpaRepository<Price, Long> {
 
 	Price findByDistrict(String district);
 	List<Price> findByCity(String city);
+	Price findByCityAndDistrict(String city, String district);
 }

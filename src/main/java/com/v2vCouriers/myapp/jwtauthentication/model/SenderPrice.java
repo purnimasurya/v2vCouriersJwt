@@ -1,12 +1,14 @@
 package com.v2vCouriers.myapp.jwtauthentication.model;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "senderprice")
+@Table(name = "vehicle_sender")
 public class SenderPrice {
 
 	@Id
@@ -14,6 +16,9 @@ public class SenderPrice {
 	
 	@Column
 	private Long price_id = 0L;
+	
+	@Column
+	private Long vehicle_id = 0L;
 	
 	@Column
 	private String price = "0";
@@ -50,8 +55,15 @@ public class SenderPrice {
 	public void setPrice(String price) {
 		this.price = price;
 	}
+
+	public Long getVehicle_id() {
+		return vehicle_id;
+	}
+
+	public void setVehicle_id(Long vehicle_id) {
+		this.vehicle_id = vehicle_id;
+	}
+
 	
-	
-	
-	
+		
 }

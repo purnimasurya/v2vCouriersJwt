@@ -14,6 +14,14 @@ public class CourierDetailsService {
 
 	 	@Autowired
 	    private CourierRepository courierRepository;
+	 	
+	 	 public List<Courier> findAll() throws Exception{
+		    	
+		    	List<Courier>  courier = null;
+		    	courier = courierRepository.findAll();
+		    	return courier;
+		        
+		    }
 
 	    public Courier findById(Long id) throws Exception {
 	    	
@@ -101,10 +109,12 @@ public class CourierDetailsService {
 			List<Courier>  courier = null;
 			
 	    	courier = courierRepository.findByVehicle_Id(id);
-	    	
 	        return courier;
 			
 		}
+		
+		
+		
 		
 
 }

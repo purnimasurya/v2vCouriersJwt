@@ -22,4 +22,8 @@ public class PriceDetailsService {
 		return priceRepository.findByCity(city);
 	}
 	
+	public Price findByCityAndDistrict(String city, String district) {
+		return priceRepository.findByCityAndDistrict(city, district);
+	}
+	
 }

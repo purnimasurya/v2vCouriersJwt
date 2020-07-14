@@ -19,4 +19,5 @@ public class VehicleDetailsService {
 					() -> new Exception("Vehicle Not Found with -> id : " + id));
         return vehicle;
     }
+
 }

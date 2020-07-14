@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.v2vCouriers.myapp.jwtauthentication.message.request.CourierForm;
 import com.v2vCouriers.myapp.jwtauthentication.message.response.ResponseMessage;
 import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
+import com.v2vCouriers.myapp.jwtauthentication.model.Price;
+import com.v2vCouriers.myapp.jwtauthentication.model.RepPrice;
+import com.v2vCouriers.myapp.jwtauthentication.model.SenderPrice;
 import com.v2vCouriers.myapp.jwtauthentication.model.Vehicle;
 import com.v2vCouriers.myapp.jwtauthentication.model.VehicleName;
 import com.v2vCouriers.myapp.jwtauthentication.repository.CourierRepository;
@@ -32,6 +36,7 @@ import com.v2vCouriers.myapp.jwtauthentication.repository.RepPriceRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.SenderPriceRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.VehicleRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
+import com.v2vCouriers.myapp.jwtauthentication.security.services.PriceDetailsService;
 
 
 
@@ -51,7 +56,8 @@ public class CourierRestAPIs {
 	@Autowired
 	VehicleRepository vehicleRepository;
 	
-
+	@Autowired
+	PriceDetailsService priceDetailsService;
 	
 	@Autowired
 	SenderPriceRepository senderPriceRepository;
@@ -110,8 +116,68 @@ public class CourierRestAPIs {
 
 		courierRepository.save(courier);
 		
+		savePrice(courier);
+		
 		return new ResponseEntity<>(new ResponseMessage("Courier registered successfully!"), HttpStatus.OK);
 		
+	}
+	
+	@GetMapping("/newPrice")
+ 	public ResponseEntity<?> savePrice(Courier courier) throws Exception {
+ 		Long id1 = null;
+ 		String price1 = null;
+ 		Long id2 = null;
+ 		String price11 = null;
+ 		Long id = courier.getId();
+
+
+ 		String sendercity = new String(courier.getSendercity());
+ 		String senderdistrict = new String(courier.getSenderdistrict());
+ 		int c_price = Integer.parseInt(courier.getPrice());
+ 		//Set<Vehicle> vehicle = courier.getVehicle();
+
+ 		List<Price> price = priceDetailsService.findByCity(sendercity);
+ 		for(Price p : price) {
+ 			String a = p.getDistrict();
+ 			if(a.equals(senderdistrict)) {
+ 				id1 = p.getId();
+
+ 				price1 = p.getPrice();
+ 			}
+ 		}
+
+ 		String repcity = new String(courier.getRepcity());
+ 		String repdistrict = new String(courier.getRepdistrict());
+
+ 		List<Price> price2 = priceDetailsService.findByCity(repcity);
+ 		for(Price p : price2) {
+ 			String a = p.getDistrict();
+ 			if(a.equals(repdistrict)) {
+ 				id2 = p.getId();
+
+ 				price11 = p.getPrice();
+ 			}
+ 		}
+
+ 		SenderPrice senderPrice = new SenderPrice(id, id1, price1);
+ 		senderPriceRepository.save(senderPrice);
+
+ 		RepPrice repPrice = new RepPrice(id, id2, price11);
+ 		repPriceRepository.save(repPrice);
+
+ 		String tot_price = Integer.toString(Integer.parseInt(price1) + Integer.parseInt(price11) + c_price);
+ 		courier.setPrice(tot_price);
+ 		courierRepository.save(courier);
+ 		return new ResponseEntity<>(new ResponseMessage("Courier price updated successfully!"), HttpStatus.OK);	
+
+ 	}
+	
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/couriers
+	@RequestMapping("/couriers")
+	public List<Courier> getCourierById() throws Exception {
+		return courierDetailsService.findAll();
 	}
 
 
@@ -244,6 +310,7 @@ public class CourierRestAPIs {
 	public List<Courier> getCourierByVehicle(@PathVariable Long id) throws Exception {
 		return courierDetailsService.findByVehicle_Id(id);
 	}
+	
 	
 	
 }
