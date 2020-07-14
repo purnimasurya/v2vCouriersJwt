@@ -134,7 +134,13 @@ public class CourierRestAPIs {
  		String sendercity = new String(courier.getSendercity());
  		String senderdistrict = new String(courier.getSenderdistrict());
  		int c_price = Integer.parseInt(courier.getPrice());
- 		//Set<Vehicle> vehicle = courier.getVehicle();
+ 		
+ 		Set<Vehicle> vehicle = courier.getVehicle();
+ 		Long vehicle_id = null;
+ 		
+ 		for (Vehicle temp : vehicle) {
+ 	        vehicle_id = temp.getId();
+ 	     }
 
  		List<Price> price = priceDetailsService.findByCity(sendercity);
  		for(Price p : price) {
@@ -160,9 +166,11 @@ public class CourierRestAPIs {
  		}
 
  		SenderPrice senderPrice = new SenderPrice(id, id1, price1);
+ 		senderPrice.setVehicle_id(vehicle_id);
  		senderPriceRepository.save(senderPrice);
 
  		RepPrice repPrice = new RepPrice(id, id2, price11);
+ 		repPrice.setVehicle_id(vehicle_id);
  		repPriceRepository.save(repPrice);
 
  		String tot_price = Integer.toString(Integer.parseInt(price1) + Integer.parseInt(price11) + c_price);
