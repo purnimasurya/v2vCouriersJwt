@@ -60,13 +60,13 @@ public class CourierRestAPIs {
 	VehicleRepository vehicleRepository;
 	
 	@Autowired
-	PriceDetailsService priceDetailsService;
+	private PriceDetailsService priceDetailsService;
 	
 	@Autowired
-	SenderPriceDetailsService senderPriceDetailsService;
+	private SenderPriceDetailsService senderPriceDetailsService;
 	
 	@Autowired
-	RepPriceDetailsService repPriceDetailsService;
+	private RepPriceDetailsService repPriceDetailsService;
 	
 	@Autowired
 	SenderPriceRepository senderPriceRepository;
