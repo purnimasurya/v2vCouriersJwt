@@ -5,6 +5,7 @@ package com.v2vCouriers.myapp.jwtauthentication.controller;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.validation.Valid;
@@ -37,6 +38,8 @@ import com.v2vCouriers.myapp.jwtauthentication.repository.SenderPriceRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.VehicleRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.PriceDetailsService;
+import com.v2vCouriers.myapp.jwtauthentication.security.services.RepPriceDetailsService;
+import com.v2vCouriers.myapp.jwtauthentication.security.services.SenderPriceDetailsService;
 
 
 
@@ -58,6 +61,12 @@ public class CourierRestAPIs {
 	
 	@Autowired
 	PriceDetailsService priceDetailsService;
+	
+	@Autowired
+	SenderPriceDetailsService senderPriceDetailsService;
+	
+	@Autowired
+	RepPriceDetailsService repPriceDetailsService;
 	
 	@Autowired
 	SenderPriceRepository senderPriceRepository;
@@ -166,11 +175,11 @@ public class CourierRestAPIs {
  		}
 
  		SenderPrice senderPrice = new SenderPrice(id, id1, price1);
- 		senderPrice.setVehicle_id(vehicle_id);
+ 		senderPrice.setVehicleid(vehicle_id);
  		senderPriceRepository.save(senderPrice);
 
  		RepPrice repPrice = new RepPrice(id, id2, price11);
- 		repPrice.setVehicle_id(vehicle_id);
+ 		repPrice.setVehicleid(vehicle_id);
  		repPriceRepository.save(repPrice);
 
  		String tot_price = Integer.toString(Integer.parseInt(price1) + Integer.parseInt(price11) + c_price);
@@ -319,6 +328,20 @@ public class CourierRestAPIs {
 		return courierDetailsService.findByVehicle_Id(id);
 	}
 	
+	@GetMapping("/sendervehicleidbycourierid/{id}")
+	public Long getSenderVehicleIdByCourierId(@PathVariable Long id) throws Exception {
+		return senderPriceDetailsService.findByCourierid(id);
+	}
+	
+	@GetMapping("/repvehicleidbycourierid/{id}")
+	public Long getRepVehicleIdByCourierId(@PathVariable Long id) throws Exception {
+		return repPriceDetailsService.findByCourierid(id);
+	}
+	
+	@RequestMapping("/senderbyid/{id}")
+	public Optional<SenderPrice> getSenderPriceById(@PathVariable Long id) throws Exception {
+		return senderPriceDetailsService.findById(id);
+	}
 	
 	
 }

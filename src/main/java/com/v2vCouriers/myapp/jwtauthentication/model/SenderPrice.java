@@ -12,40 +12,40 @@ import javax.persistence.Table;
 public class SenderPrice {
 
 	@Id
-	private Long courier_id = 0L;
+	private Long courierid = 0L;
 	
 	@Column
-	private Long price_id = 0L;
+	private Long priceid = 0L;
 	
 	@Column
-	private Long vehicle_id = 0L;
+	private Long vehicleid = 0L;
 	
 	@Column
 	private String price = "0";
 
 	public SenderPrice() {}
 	
-	public SenderPrice(Long courier_id, Long price_id, String price) {
+	public SenderPrice(Long courierid, Long priceid, String price) {
 		super();
-		this.courier_id = courier_id;
-		this.price_id = price_id;
+		this.courierid = courierid;
+		this.priceid = priceid;
 		this.price = price;
 	}
 
-	public Long getCourier_id() {
-		return courier_id;
+	public Long getCourierid() {
+		return courierid;
 	}
 
-	public void setCourier_id(Long courier_id) {
-		this.courier_id = courier_id;
+	public void setCourierid(Long courierid) {
+		this.courierid = courierid;
 	}
 
-	public Long getPrice_id() {
-		return price_id;
+	public Long getPriceid() {
+		return priceid;
 	}
 
-	public void setPrice_id(Long price_id) {
-		this.price_id = price_id;
+	public void setPriceid(Long price_id) {
+		this.priceid = price_id;
 	}
 
 	public String getPrice() {
@@ -56,12 +56,12 @@ public class SenderPrice {
 		this.price = price;
 	}
 
-	public Long getVehicle_id() {
-		return vehicle_id;
+	public Long getVehicleid() {
+		return vehicleid;
 	}
 
-	public void setVehicle_id(Long vehicle_id) {
-		this.vehicle_id = vehicle_id;
+	public void setVehicleid(Long vehicleid) {
+		this.vehicleid = vehicleid;
 	}
 
 	

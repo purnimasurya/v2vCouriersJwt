@@ -19,11 +19,19 @@ public class VehicleRestAPI {
 	VehicleDetailsService vehicleDetailsService;
 	
 	//Sample request
-	//http://localhost:8080/v2vcouriers/vehiclebyid/{id}
-	@RequestMapping("/vehiclebyid/{id}")
-	public VehicleName getCourierByVehicle(@PathVariable Long id) throws Exception {
+	//http://localhost:8080/v2vcouriers/vehiclenamebyid/{id}
+	@RequestMapping("/vehiclenamebyid/{id}")
+	public VehicleName getVehicleNameById(@PathVariable Long id) throws Exception {
 		Vehicle vehicle = vehicleDetailsService.findById(id);
 		VehicleName Name = vehicle.getName();
 		return Name;
+	}
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/vehiclebyid/{id}
+	@RequestMapping("/vehiclebyid/{id}")
+	public Vehicle getVehicleById(@PathVariable Long id) throws Exception {
+		Vehicle vehicle = vehicleDetailsService.findById(id);
+		return vehicle;
 	}
 }
