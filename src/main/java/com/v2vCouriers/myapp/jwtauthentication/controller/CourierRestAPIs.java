@@ -3,11 +3,22 @@ package com.v2vCouriers.myapp.jwtauthentication.controller;
 
 
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Properties;
 import java.util.Set;
 
+import javax.mail.Message;
+import javax.mail.Multipart;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -126,7 +137,7 @@ public class CourierRestAPIs {
 		courierRepository.save(courier);
 		
 		savePrice(courier);
-		
+		sendmail(courier);
 		return new ResponseEntity<>(new ResponseMessage("Courier registered successfully!"), HttpStatus.OK);
 		
 	}
@@ -188,6 +199,78 @@ public class CourierRestAPIs {
  		return new ResponseEntity<>(new ResponseMessage("Courier price updated successfully!"), HttpStatus.OK);	
 
  	}
+	
+	private void sendmail(Courier courier) throws Exception {
+		
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.port", "587");
+		   
+		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+		     protected PasswordAuthentication getPasswordAuthentication() {
+		    	 return new PasswordAuthentication("purnima1999.surya@gmail.com", "L1@mg_pu^n1@220775");
+		     }
+		});
+		
+		Long id = courier.getId();
+		String idString = Long.toString(id);
+		
+		String Customer = courier.getSendername();
+		String s_email = courier.getEmail();
+		String s_no = courier.getPhnumber();
+		String s_add = courier.getSenderaddress();
+		String s_city = courier.getSendercity();
+		String s_dis = courier.getSenderdistrict();
+		String s_state = courier.getSenderstate();
+		String s_country = courier.getSendercountry(); 
+		String contact = courier.getContacttype(); 
+		String r_name = courier.getRepname();
+		String r_no = courier.getRepphnumber();
+		String r_add = courier.getRepaddress(); 
+		String r_city = courier.getRepcity(); 
+		String r_dis = courier.getRepdistrict();
+		String r_state = courier.getRepstate();
+		String r_country = courier.getRepcountry(); 
+		String cs = courier.getCourierservice(); 
+		Date date = courier.getPickupdate();
+		String status = courier.getStatus(); 
+		String wt = courier.getWt();
+		String vol = courier.getVol();
+		String price = courier.getPrice();
+		
+		Long vehicle_id = getRepVehicleIdByCourierId(id);
+		String vehicle_idString = Long.toString(vehicle_id);
+		
+		String Content = "<br> id : " + idString + "<br> sendername : " + Customer + "<br> email : " + s_email + "<br> phnumber : " + s_no
+				+ "<br> senderaddress : " + s_add + "<br> senderdistrict : " + s_dis + "<br> sendercity : "
+				+ s_city + "<br> senderstate : " + s_state + "<br> sendercountry : " + s_country + "<br> contacttype : "
+				+ contact + ", repname=" + r_name + ", repphnumber=" + r_no + ", repaddress=" + r_add
+				+ "<br> repcity : " + r_city + "<br> repdistrict : " + r_dis + "<br> repstate : " + r_state + "<br> repcountry : "
+				+ r_country + ", courierservice=" + cs + ", pickupdate=" + date + ", status="
+				+ status + "<br> wt : " + wt + "<br> vol : " + vol + "<br> price : " + price + "<br> vehicle id : " + vehicle_idString;
+				
+		Message msg = new MimeMessage(session);
+		msg.setFrom(new InternetAddress("purnima1999.surya@gmail.com", false));
+
+		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s_email));
+		msg.setSubject("V2V Couriers Confirmation");
+		//msg.setContent("Dear Customer,<br>Your courier details have been stored successfully!! Thank you for registering with V2V Couriers!</p>", "text/html");
+
+		MimeBodyPart messageBodyPart = new MimeBodyPart();
+		messageBodyPart.setContent("Dear " + Customer + " ,<p>Your courier details have been stored successfully!! The details are as follows : <br>" + Content + "</p><p>Thank you for registering with V2V Couriers!</p>", "text/html");
+		
+		
+		Multipart multipart = new MimeMultipart();
+		multipart.addBodyPart(messageBodyPart);
+		   //MimeBodyPart attachPart = new MimeBodyPart();
+
+		   /*attachPart.attachFile("/var/tmp/image19.png");
+		   multipart.addBodyPart(attachPart);*/
+		msg.setContent(multipart);
+		Transport.send(msg);   
+	}	
 	
 	
 	//Sample request

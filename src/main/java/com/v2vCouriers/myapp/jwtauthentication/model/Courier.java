@@ -389,6 +389,8 @@ public class Courier {
 	public void setVehicle(Set<Vehicle> vehicle) {
 		this.vehicle = vehicle;
 	}
+
+
 	
 	
 

@@ -46,7 +46,7 @@ public class GraphRestAPIs {
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/pricebymonth
-	@RequestMapping("/pricebymonth")
+	@RequestMapping("/graph")
 	public List<Graph> getPriceAndMonth() throws Exception {
 		return graphDetailsService.findAll();
 	}
