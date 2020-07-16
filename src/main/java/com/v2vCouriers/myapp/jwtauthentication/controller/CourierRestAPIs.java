@@ -243,13 +243,13 @@ public class CourierRestAPIs {
 		Long vehicle_id = getRepVehicleIdByCourierId(id);
 		String vehicle_idString = Long.toString(vehicle_id);
 		
-		String Content = "<br> id : " + idString + "<br> sendername : " + Customer + "<br> email : " + s_email + "<br> phnumber : " + s_no
-				+ "<br> senderaddress : " + s_add + "<br> senderdistrict : " + s_dis + "<br> sendercity : "
-				+ s_city + "<br> senderstate : " + s_state + "<br> sendercountry : " + s_country + "<br> contacttype : "
-				+ contact + ", repname=" + r_name + ", repphnumber=" + r_no + ", repaddress=" + r_add
-				+ "<br> repcity : " + r_city + "<br> repdistrict : " + r_dis + "<br> repstate : " + r_state + "<br> repcountry : "
-				+ r_country + ", courierservice=" + cs + ", pickupdate=" + date + ", status="
-				+ status + "<br> wt : " + wt + "<br> vol : " + vol + "<br> price : " + price + "<br> vehicle id : " + vehicle_idString;
+		String Content = "<br> ID : " + idString + "<br> SENDER'S NAME : " + Customer + "<br> SENDER'S EMAIL : " + s_email + "<br> SENDER'S PHONE NO. : " + s_no
+				+ "<br> SENDER'S ADDRESS : " + s_add + "<br> SENDER'S DISTRICT : " + s_dis + "<br> SENDER'S CITY : "
+				+ s_city + "<br> SENDER'S STATE : " + s_state + "<br> SENDER'S COUNTRY : " + s_country + "<br> CONTACT TYPE : "
+				+ contact + "<br> RECIPIENT NAME : " + r_name + "<br> RECIPIENT PHONE N0. : " + r_no + "<br> RECIPIENT ADDRESS : " + r_add
+				+ "<br> RECIPIENT CITY : " + r_city + "<br> RECIPIENT DISTRICT : " + r_dis + "<br> RECIPIENT STATE : " + r_state + "<br> RECIPIENT COUNTRY : "
+				+ r_country + "<br> COURIER SERVICE : " + cs + "<br> PICKUP DATE : " + date + "<br> STATUS : "
+				+ status + "<br> WT : " + wt + "<br> VOL : " + vol + "<br> PRICE : " + price + "<br> VEHICLE ID : " + vehicle_idString;
 				
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress("purnima1999.surya@gmail.com", false));
