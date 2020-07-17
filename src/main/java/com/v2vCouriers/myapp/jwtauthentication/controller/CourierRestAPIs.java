@@ -210,7 +210,7 @@ public class CourierRestAPIs {
 		   
 		Session session = Session.getInstance(props, new javax.mail.Authenticator() {
 		     protected PasswordAuthentication getPasswordAuthentication() {
-		    	 return new PasswordAuthentication("purnima1999.surya@gmail.com", "L1@mg_pu^n1@220775");
+		    	 return new PasswordAuthentication("v2vcouriers@gmail.com", "v2v@1234");
 		     }
 		});
 		
@@ -252,7 +252,7 @@ public class CourierRestAPIs {
 				+ status + "<br> WT : " + wt + "<br> VOL : " + vol + "<br> PRICE : " + price + "<br> VEHICLE ID : " + vehicle_idString;
 				
 		Message msg = new MimeMessage(session);
-		msg.setFrom(new InternetAddress("purnima1999.surya@gmail.com", false));
+		msg.setFrom(new InternetAddress("v2vcouriers@gmail.com", false));
 
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s_email));
 		msg.setSubject("V2V Couriers Confirmation");
