@@ -53,7 +53,7 @@ public class CourierDetailsService {
 	    }
 	    
 
-		public void updateStatusToYetToRecieve(Long id) {
+		public Courier updateStatusToYetToRecieve(Long id) {
 			
 			Courier courier = null;
 			try {
@@ -64,9 +64,10 @@ public class CourierDetailsService {
 			}
 			courier.setStatus("Yet_to_recieve");
 			courierRepository.save(courier);
+			return courier;
 		}
 		
-		public void updateStatusToInProgress(Long id) {
+		public Courier updateStatusToInProgress(Long id) {
 			
 			Courier courier = null;
 			try {
@@ -77,9 +78,10 @@ public class CourierDetailsService {
 			}
 			courier.setStatus("In_progress");
 			courierRepository.save(courier);
+			return courier;
 		}
 		
-		public void updateStatusToReadyToDeliver(Long id) {
+		public Courier updateStatusToReadyToDeliver(Long id) {
 			
 			Courier courier = null;
 			try {
@@ -90,9 +92,10 @@ public class CourierDetailsService {
 			}
 			courier.setStatus("Ready_to_deliver");
 			courierRepository.save(courier);
+			return courier;
 		}
 		
-		public void updateStatusToDelivered(Long id) {
+		public Courier updateStatusToDelivered(Long id) {
 			
 			Courier courier = null;
 			try {
@@ -103,6 +106,7 @@ public class CourierDetailsService {
 			}
 			courier.setStatus("Delivered");
 			courierRepository.save(courier);
+			return courier;
 		}
 
 		public List<Courier> findByVehicle_Id(Long id) {

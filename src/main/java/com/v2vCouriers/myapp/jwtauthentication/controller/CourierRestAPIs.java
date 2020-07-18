@@ -309,7 +309,7 @@ public class CourierRestAPIs {
 	//http://localhost:8080/v2vcouriers/couriersbyytrstatus
 	@RequestMapping("/couriersbyytrstatus")
 	public List<Courier> getCourierByYtrStatus() throws Exception {
-		return courierDetailsService.findByStatus("Yet_to_recieve");
+		return courierDetailsService.findByStatus("Yet_to_receive");
 	}
 	
 	
@@ -325,24 +325,17 @@ public class CourierRestAPIs {
 	//http://localhost:8080/v2vcouriers/couriersbyrtdstatus
 	@RequestMapping("/couriersbyrtdstatus")
 	public List<Courier> getCourierByRtdStatus() throws Exception {
-		return courierDetailsService.findByStatus("Ready_to_deliever");
+		return courierDetailsService.findByStatus("Ready_to_deliver");
 	}
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateytastatus
 	@PutMapping("/updateytastatus/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> updateYetToAcceptStatus (@PathVariable Long id) {
+	public Courier updateYetToAcceptStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
-		try {
-			courierDetailsService.updateStatusToYetToRecieve(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+		return courierDetailsService.updateStatusToYetToRecieve(id);
 		
 	}
 	
@@ -351,17 +344,10 @@ public class CourierRestAPIs {
 	//http://localhost:8080/v2vcouriers/updateytastatus
 	@PutMapping("/updateytrstatus/{id}")
 	@PreAuthorize("hasRole('COURIERBOY')")
-	public ResponseEntity<?> updateYetToRecieveStatus (@PathVariable Long id) {
+	public Courier updateYetToReceiveStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
-		try {
-			courierDetailsService.updateStatusToInProgress(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+		return courierDetailsService.updateStatusToInProgress(id);
 			
 	}
 	
@@ -370,19 +356,10 @@ public class CourierRestAPIs {
 	//http://localhost:8080/v2vcouriers/updateinstatus
 	@PutMapping("/updateipstatus/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
-	public ResponseEntity<?> updateInProgressStatus (@PathVariable Long id) {
+	public Courier updateInProgressStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
-		try 
-		{
-			courierDetailsService.updateStatusToReadyToDeliver(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
-			
+		return courierDetailsService.updateStatusToReadyToDeliver(id);
 	}
 	
 	
@@ -390,17 +367,10 @@ public class CourierRestAPIs {
 	//http://localhost:8080/v2vcouriers/updatertdstatus
 	@PutMapping("/updatertdstatus/{id}")
 	@PreAuthorize("hasRole('COURIERBOY')")
-	public ResponseEntity<?> updateReadyToDeliverStatus (@PathVariable Long id) {
+	public Courier updateReadyToDeliverStatus (@PathVariable Long id) {
 
 		// Updating the Courier Status
-		try {
-			courierDetailsService.updateStatusToDelivered(id);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-			
-		return new ResponseEntity<>(new ResponseMessage("Courier status updated successfully!"), HttpStatus.OK);
+		return courierDetailsService.updateStatusToDelivered(id);
 			
 	}
 	
