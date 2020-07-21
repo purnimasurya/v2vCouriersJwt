@@ -106,6 +106,7 @@ public class AuthRestAPIs {
 		});
 
 		user.setRoles(roles);
+		user.setPoints(20L);
 		userRepository.save(user);
 
 		return new ResponseEntity<>(new ResponseMessage("User registered successfully!"), HttpStatus.OK);

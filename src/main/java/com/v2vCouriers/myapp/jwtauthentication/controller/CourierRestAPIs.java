@@ -25,6 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,11 +43,13 @@ import com.v2vCouriers.myapp.jwtauthentication.model.Courier;
 import com.v2vCouriers.myapp.jwtauthentication.model.Price;
 import com.v2vCouriers.myapp.jwtauthentication.model.RepPrice;
 import com.v2vCouriers.myapp.jwtauthentication.model.SenderPrice;
+import com.v2vCouriers.myapp.jwtauthentication.model.User;
 import com.v2vCouriers.myapp.jwtauthentication.model.Vehicle;
 import com.v2vCouriers.myapp.jwtauthentication.model.VehicleName;
 import com.v2vCouriers.myapp.jwtauthentication.repository.CourierRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.RepPriceRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.SenderPriceRepository;
+import com.v2vCouriers.myapp.jwtauthentication.repository.UserRepository;
 import com.v2vCouriers.myapp.jwtauthentication.repository.VehicleRepository;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.CourierDetailsService;
 import com.v2vCouriers.myapp.jwtauthentication.security.services.PriceDetailsService;
@@ -84,6 +88,9 @@ public class CourierRestAPIs {
 	
 	@Autowired
 	RepPriceRepository repPriceRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	
 	//http://localhost:8080/v2vcouriers/newcourier
@@ -96,7 +103,7 @@ public class CourierRestAPIs {
 				courierRequest.getSendercountry(), courierRequest.isAgree(), courierRequest.getContacttype(), courierRequest.getRepname(), 
 				courierRequest.getRepphnumber(), courierRequest.getRepaddress(), courierRequest.getRepcity(), courierRequest.getRepdistrict(),
 				courierRequest.getRepstate(), courierRequest.getRepcountry(), courierRequest.getCourierservice(), courierRequest.getPickupdate(), 
-				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice());
+				courierRequest.getStatus(), courierRequest.getWt(), courierRequest.getVol(), courierRequest.getPrice(), courierRequest.isRedeemPoints());
 		
 		Vehicle strVehicle;
 		Set<Vehicle> vehicle = new HashSet<>();
@@ -194,6 +201,49 @@ public class CourierRestAPIs {
  		repPriceRepository.save(repPrice);
 
  		String tot_price = Integer.toString(Integer.parseInt(price1) + Integer.parseInt(price11) + c_price);
+ 		
+ 		
+ 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String username = null;
+		Long extraPoints = null;
+		
+		if (principal instanceof UserDetails) {
+		  username = ((UserDetails)principal).getUsername();
+		} 
+		
+		User user = userRepository.findByUsername(username);
+		Long points = user.getPoints();
+		
+		String courierService = courier.getCourierservice().toLowerCase();
+		
+		switch (courierService) {
+		
+			case "standard": 	
+								extraPoints = 20L;
+								break;
+			case "pallet":		
+								extraPoints = 20L;
+								break;
+			case "same-day":	
+								extraPoints = 30L;
+								break;
+			case "overnight":	
+								extraPoints = 30L;
+								break;
+			case "international":
+								extraPoints = 50L;
+			
+		}
+		
+		boolean redeemPoints = courier.isRedeemPoints();
+		if(redeemPoints) {
+			tot_price = Long.toString(Long.parseLong(tot_price) - (points * 2));
+			points = points - points;
+		}
+		
+		points = points + extraPoints;
+		user.setPoints(points);
+		
  		courier.setPrice(tot_price);
  		courierRepository.save(courier);
  		return new ResponseEntity<>(new ResponseMessage("Courier price updated successfully!"), HttpStatus.OK);	
@@ -256,7 +306,7 @@ public class CourierRestAPIs {
 
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s_email));
 		msg.setSubject("V2V Couriers Confirmation");
-		//msg.setContent("Dear Customer,<br>Your courier details have been stored successfully!! Thank you for registering with V2V Couriers!</p>", "text/html");
+		
 
 		MimeBodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent("Dear " + Customer + " ,<p>Your courier details have been stored successfully!! The details are as follows : <br>" + Content + "</p><p>Thank you for registering with V2V Couriers!</p>", "text/html");
@@ -264,13 +314,10 @@ public class CourierRestAPIs {
 		
 		Multipart multipart = new MimeMultipart();
 		multipart.addBodyPart(messageBodyPart);
-		   //MimeBodyPart attachPart = new MimeBodyPart();
-
-		   /*attachPart.attachFile("/var/tmp/image19.png");
-		   multipart.addBodyPart(attachPart);*/
+		
 		msg.setContent(multipart);
 		Transport.send(msg);   
-	}	
+	}
 	
 	
 	//Sample request

@@ -102,6 +102,9 @@ public class CourierForm {
     
     private String price;
     
+
+    private boolean redeemPoints;
+    
     private Set<String> vehicle;
 
 	public Long getId() {
@@ -302,6 +305,14 @@ public class CourierForm {
 
 	public void setVehicle(Set<String> vehicle) {
 		this.vehicle = vehicle;
+	}
+
+	public boolean isRedeemPoints() {
+		return redeemPoints;
+	}
+
+	public void setRedeemPoints(boolean redeemPoints) {
+		this.redeemPoints = redeemPoints;
 	}
 
 	

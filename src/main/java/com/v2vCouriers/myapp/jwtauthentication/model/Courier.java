@@ -109,8 +109,7 @@ public class Courier {
     @Size(min=3, max = 30)
     @Column
     private String repcountry;
-    
-    
+     
     @NotBlank
     @Size(min=3, max = 50)
     @Column
@@ -136,6 +135,9 @@ public class Courier {
     @Column
     private String price;
     
+    @Column
+    private boolean redeemPoints;
+    
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "courier_vehicles", 
     	joinColumns = @JoinColumn(name = "courier_id"), 
@@ -150,7 +152,8 @@ public class Courier {
     
 	public Courier(String sendername,String email, String phnumber,String senderaddress, String sendercity, String senderdistrict, String senderstate,
 			String sendercountry, boolean agree,  String contacttype, String repname, String repphnumber, String repaddress,  String repcity,
-			String repdistrict, String repstate, String repcountry, String courierservice, Date pickupdate,String status, String wt, String vol, String price) {
+			String repdistrict, String repstate, String repcountry, String courierservice, Date pickupdate,String status, String wt, String vol, 
+			String price, boolean redeemPoints) {
 		super();
 		this.sendername = sendername;
 		this.email = email;
@@ -175,6 +178,7 @@ public class Courier {
 		this.wt = wt;
 		this.vol = vol;
 		this.price = price;
+		this.redeemPoints = redeemPoints;
 	}
 
 	public Long getId() {
@@ -391,6 +395,16 @@ public class Courier {
 	}
 
 
+	public boolean isRedeemPoints() {
+		return redeemPoints;
+	}
+
+
+	public void setRedeemPoints(boolean redeemPoints) {
+		this.redeemPoints = redeemPoints;
+	}
+
+	
 	
 	
 
