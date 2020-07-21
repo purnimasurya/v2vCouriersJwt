@@ -3,11 +3,13 @@ package com.v2vCouriers.myapp.jwtauthentication.controller;
 
 
 
+
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
+import java.util.Random;
 import java.util.Set;
 
 import javax.mail.Message;
@@ -205,7 +207,7 @@ public class CourierRestAPIs {
  		
  		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String username = null;
-		Long extraPoints = null;
+		
 		
 		if (principal instanceof UserDetails) {
 		  username = ((UserDetails)principal).getUsername();
@@ -213,29 +215,34 @@ public class CourierRestAPIs {
 		
 		User user = userRepository.findByUsername(username);
 		Long points = user.getPoints();
+		Long extraPoints = 0L;
 		
-		String courierService = courier.getCourierservice().toLowerCase();
-		
-		switch (courierService) {
-		
-			case "standard": 	
-								extraPoints = 20L;
-								break;
-			case "pallet":		
-								extraPoints = 20L;
-								break;
-			case "same-day":	
-								extraPoints = 30L;
-								break;
-			case "overnight":	
-								extraPoints = 30L;
-								break;
-			case "international":
-								extraPoints = 50L;
+		double rand1 = Math.random();
+		if(rand1 > 0.7) {
+			String courierService = courier.getCourierservice().toLowerCase();
+			Random random = new Random();
+			switch (courierService) {
 			
+				case "standard": 	
+								extraPoints = (long) random.nextInt((20 - 0) + 1);
+								break;
+				case "pallet":		
+								extraPoints = (long) random.nextInt((20 - 0) + 1);
+								break;
+				case "same-day":	
+								extraPoints = (long) ((random.nextInt((30 - 10) + 1)) + 10);
+								break;
+				case "overnight":	
+								extraPoints = (long) ((random.nextInt((30 - 10) + 1)) + 10);
+								break;
+				case "international":
+								extraPoints = (long) ((random.nextInt((50 - 30) + 1)) +  30);
+			}
+				
 		}
 		
 		boolean redeemPoints = courier.isRedeemPoints();
+		
 		if(redeemPoints) {
 			tot_price = Long.toString(Long.parseLong(tot_price) - (points * 2));
 			points = points - points;
