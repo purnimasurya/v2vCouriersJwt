@@ -247,12 +247,16 @@ public class CourierRestAPIs {
 			tot_price = Long.toString(Long.parseLong(tot_price) - (points * 2));
 			points = points - points;
 		}
-		
+		System.out.println(points);
 		points = points + extraPoints;
 		user.setPoints(points);
 		
+		System.out.println(points);
+		
  		courier.setPrice(tot_price);
  		courierRepository.save(courier);
+ 		
+ 		userRepository.save(user);
  		return new ResponseEntity<>(new ResponseMessage("Courier price updated successfully!"), HttpStatus.OK);	
 
  	}
