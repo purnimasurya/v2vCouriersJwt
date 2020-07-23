@@ -1,6 +1,7 @@
 package com.v2vCouriers.myapp.jwtauthentication.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -139,7 +140,13 @@ public class CourierData {
     private String vehicleid;
     
     @Column
-    private String location;
+    private int counter = 0;
+    
+    @Column
+    private List<String> locations;
+    
+    @Column
+    private String currentLocation;
 
 	public Long getId() {
 		return id;
@@ -345,17 +352,34 @@ public class CourierData {
 		return vehicleid;
 	}
 
-	public void setVehicle_id(String vehicleid) {
+	public void setVehicleid(String vehicleid) {
 		this.vehicleid = vehicleid;
 	}
 
-	public String getLocation() {
-		return location;
+	public String getCurrentLocation() {
+		return currentLocation;
 	}
 
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCurrentLocation(String currentLocation) {
+		this.currentLocation = currentLocation;
+	}
+
+	public List<String> getLocations() {
+		return locations;
+	}
+
+	public void setLocations(List<String> locations) {
+		this.locations = locations;
+	}
+
+	public int getCounter() {
+		return counter;
+	}
+
+	public void setCounter(int counter) {
+		this.counter = counter;
 	}
     
+	
     
 }

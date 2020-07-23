@@ -62,7 +62,7 @@ public class CourierDetailsService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			courier.setStatus("Yet_to_recieve");
+			courier.setStatus("Yet_to_receive");
 			courierRepository.save(courier);
 			return courier;
 		}

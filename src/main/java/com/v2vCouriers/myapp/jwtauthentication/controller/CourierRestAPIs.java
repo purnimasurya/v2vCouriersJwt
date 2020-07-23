@@ -218,7 +218,7 @@ public class CourierRestAPIs {
 		Long extraPoints = 0L;
 		
 		double rand1 = Math.random();
-		if(rand1 > 0.7) {
+		if(rand1 > 0.2) {
 			String courierService = courier.getCourierservice().toLowerCase();
 			Random random = new Random();
 			switch (courierService) {
