@@ -3,6 +3,7 @@ package com.v2vCouriers.myapp.jwtauthentication.message.request;
 import java.util.Date;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
@@ -106,6 +107,9 @@ public class CourierForm {
     private boolean redeemPoints;
     
     private Set<String> vehicle;
+    
+    @Column
+    private String extraPoints;
 
 	public Long getId() {
 		return id;
@@ -313,6 +317,14 @@ public class CourierForm {
 
 	public void setRedeemPoints(boolean redeemPoints) {
 		this.redeemPoints = redeemPoints;
+	}
+
+	public String getExtraPoints() {
+		return extraPoints;
+	}
+
+	public void setExtraPoints(String extraPoints) {
+		this.extraPoints = extraPoints;
 	}
 
 	

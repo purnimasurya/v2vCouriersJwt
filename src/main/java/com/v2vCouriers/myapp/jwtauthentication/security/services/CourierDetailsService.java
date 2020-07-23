@@ -118,7 +118,13 @@ public class CourierDetailsService {
 		}
 		
 		
-		
+		public Long findExtraPoints(Long id) throws Exception {
+		    	
+		     Courier courier = null;
+		     courier = courierRepository.findById(id).orElseThrow(
+							() -> new Exception("Courier Not Found with -> id : " + id));
+		     return courier.getExtraPoints();
+	    }		
 		
 
 }

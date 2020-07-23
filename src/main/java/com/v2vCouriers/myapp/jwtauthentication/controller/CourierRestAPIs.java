@@ -241,6 +241,7 @@ public class CourierRestAPIs {
 				
 		}
 		
+		System.out.println(extraPoints);
 		boolean redeemPoints = courier.isRedeemPoints();
 		
 		if(redeemPoints) {
@@ -251,7 +252,7 @@ public class CourierRestAPIs {
 		points = points + extraPoints;
 		user.setPoints(points);
 		
-		
+		courier.setExtraPoints(extraPoints);
  		courier.setPrice(tot_price);
  		courierRepository.save(courier);
  		
@@ -299,6 +300,7 @@ public class CourierRestAPIs {
 		String wt = courier.getWt();
 		String vol = courier.getVol();
 		String price = courier.getPrice();
+		Long extraPoints = courier.getExtraPoints();
 		
 		Long vehicle_id = getRepVehicleIdByCourierId(id);
 		String vehicle_idString = Long.toString(vehicle_id);
@@ -310,6 +312,10 @@ public class CourierRestAPIs {
 				+ "<br> RECIPIENT CITY : " + r_city + "<br> RECIPIENT DISTRICT : " + r_dis + "<br> RECIPIENT STATE : " + r_state + "<br> RECIPIENT COUNTRY : "
 				+ r_country + "<br> COURIER SERVICE : " + cs + "<br> PICKUP DATE : " + date + "<br> STATUS : "
 				+ status + "<br> WT : " + wt + "<br> VOL : " + vol + "<br> PRICE : " + price + "<br> VEHICLE ID : " + vehicle_idString;
+		
+		if(extraPoints > 0) {
+			Content = Content + "<br><br><br><p><b>Congratulations, You've earned " + Long.toString(extraPoints) + " Points for this courier!!</b></p>";
+		}
 				
 		Message msg = new MimeMessage(session);
 		msg.setFrom(new InternetAddress("v2vcouriers@gmail.com", false));
@@ -317,6 +323,7 @@ public class CourierRestAPIs {
 		msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(s_email));
 		msg.setSubject("V2V Couriers Confirmation");
 		
+		//+ 
 
 		MimeBodyPart messageBodyPart = new MimeBodyPart();
 		messageBodyPart.setContent("Dear " + Customer + " ,<p>Your courier details have been stored successfully!! The details are as follows : <br>" + Content + "</p><p>Thank you for registering with V2V Couriers!</p>", "text/html");
@@ -343,6 +350,13 @@ public class CourierRestAPIs {
 	@RequestMapping("/courierbyid/{id}")
 	public Courier getCourierById(@PathVariable Long id) throws Exception {
 		return courierDetailsService.findById(id);
+	}
+	
+	//Sample request
+	//http://localhost:8080/v2vcouriers/extrapoints/{id}
+	@RequestMapping("/extrapoints/{id}")
+	public Long getExtraPoints(@PathVariable Long id) throws Exception {
+		return courierDetailsService.findExtraPoints(id);
 	}
 	
 	

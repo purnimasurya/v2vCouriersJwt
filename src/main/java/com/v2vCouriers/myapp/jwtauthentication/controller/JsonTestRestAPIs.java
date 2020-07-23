@@ -17,7 +17,7 @@ import com.v2vCouriers.myapp.jwtauthentication.model.CourierData;
 public class JsonTestRestAPIs {
 
 	//Sample request
-	//https://localhost:8443/jsontest/{id}
+	//https://localhost:8443/v2vcouriers/jsontest/{id}
 	@GetMapping("/jsontest/{id}")
 	public String getPostById(@PathVariable Long id) throws Exception {
 
@@ -27,6 +27,8 @@ public class JsonTestRestAPIs {
 	    
 	   
 	    return resp.getLocation();
+	    
+	   
 	   
 	}
 }

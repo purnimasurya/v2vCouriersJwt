@@ -144,6 +144,8 @@ public class Courier {
     	inverseJoinColumns = @JoinColumn(name = "vehicle_id"))
     private Set<Vehicle> vehicle;
 
+    @Column
+    private Long extraPoints;
 
 	public Courier() {
 		
@@ -402,6 +404,16 @@ public class Courier {
 
 	public void setRedeemPoints(boolean redeemPoints) {
 		this.redeemPoints = redeemPoints;
+	}
+
+
+	public Long getExtraPoints() {
+		return extraPoints;
+	}
+
+
+	public void setExtraPoints(Long extraPoint) {
+		this.extraPoints = extraPoint;
 	}
 
 	
