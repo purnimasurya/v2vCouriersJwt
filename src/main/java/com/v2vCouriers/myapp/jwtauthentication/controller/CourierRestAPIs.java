@@ -401,7 +401,7 @@ public class CourierRestAPIs {
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateytastatus
-	@PutMapping("/updateytastatus/{id}")
+	@RequestMapping("/updateytastatus/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public Courier updateYetToAcceptStatus (@PathVariable Long id) {
 
@@ -413,7 +413,7 @@ public class CourierRestAPIs {
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateytastatus
-	@PutMapping("/updateytrstatus/{id}")
+	@RequestMapping("/updateytrstatus/{id}")
 	@PreAuthorize("hasRole('COURIERBOY')")
 	public Courier updateYetToReceiveStatus (@PathVariable Long id) {
 
@@ -425,7 +425,7 @@ public class CourierRestAPIs {
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updateinstatus
-	@PutMapping("/updateipstatus/{id}")
+	@RequestMapping("/updateipstatus/{id}")
 	@PreAuthorize("hasRole('ADMIN')")
 	public Courier updateInProgressStatus (@PathVariable Long id) {
 
@@ -436,7 +436,7 @@ public class CourierRestAPIs {
 	
 	//Sample request
 	//http://localhost:8080/v2vcouriers/updatertdstatus
-	@PutMapping("/updatertdstatus/{id}")
+	@RequestMapping("/updatertdstatus/{id}")
 	@PreAuthorize("hasRole('COURIERBOY')")
 	public Courier updateReadyToDeliverStatus (@PathVariable Long id) {
 
